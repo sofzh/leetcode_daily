@@ -34,3 +34,27 @@ class Solution(object):
 ```
 
 ---
+
+2、[二叉树深度][https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/]
+分析：运用递归的思想：max(root) = max(l, r) + 1, 因此只需递归的找到左二子跟右儿子最大深度+1(自己本身)，只需
+给出递归终止条件--节点为None的时候，返回即可
+
+```python3
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def maxDepth(self, root: TreeNode) -> int:
+        depth = 0
+        if not root:
+            return depth
+        depth = 1
+        if root.left or root.right:
+            depth += max(self.maxDepth(root.left), self.maxDepth(root.right))
+        return depth
+            
+```
