@@ -1,4 +1,4 @@
-1、[克隆图（无向图）][https://leetcode-cn.com/problems/clone-graph/]
+1、[克隆图（无向图）](https://leetcode-cn.com/problems/clone-graph/)
 分析：首先输入只是一个图的Node， 需要边便利Node， 边进行深copy， 采用DFS策略， 需要注意需要记录已访问节点，不然容易陷入死循环，用递归的方式进行DFS，邻接列表也需要重头构建
 ```python3
 """
@@ -35,7 +35,7 @@ class Solution(object):
 
 ---
 
-2、[二叉树深度][https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/]
+2、[二叉树深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 分析：运用递归的思想：max(root) = max(l, r) + 1, 因此只需递归的找到左二子跟右儿子最大深度+1(自己本身)，只需
 给出递归终止条件--节点为None的时候，返回即可
 
