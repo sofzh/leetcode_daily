@@ -98,4 +98,39 @@ class Solution(object):
             
 ```
 [两数之和](https://leetcode-cn.com/problems/two-sum/)    
-分析：第一个思路是排序然后查找这俩数， 如果后面的查找（从大到小）没找到，说明不存在，第二个
+分析：第一个思路是排序然后查找这俩数， 如果后面的查找（从大到小）没找到，说明不存在，第二个思路是借助dict判断缺的数是否是在dict中，要注意一些细节，题目中说一个数不能多次使用，但是没说给的数中是不是有等值得数   
+```python3
+class p_tmp(object):
+    def __init__(self):
+        self.val = None
+        self.idx = None
+class Solution(object):
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        res = None 
+        if nums == []:
+            return res  
+        dic = {}
+        
+        for idx, i in enumerate(nums):
+            if i not in dic:
+                dic[i] = p_tmp()
+                dic[i].val = 1
+                dic[i].idx = [idx]
+            else: 
+                dic[i].val += 1
+                dic[i].idx.append(idx)
+        for idx, i in enumerate(nums):
+            j = target - i 
+            if j in dic:
+                if i == j:
+                    dic[j].val -= 2
+                    if dic[j].val >= 0:
+                        return [dic[j].idx[0], dic[j].idx[1]]
+                    else:
+                        continue 
+                else:
+                    return [dic[i].idx[0], dic[j].idx[0]]
+            else:
+                continue  
+        return False 
+```
