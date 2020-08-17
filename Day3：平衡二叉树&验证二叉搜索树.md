@@ -60,3 +60,40 @@ class Solution(object):
         return max(h_l, h_r) + 1
 
 ```
+   
+---   
+[二叉搜索树验证](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+分析：通过中序遍历获得一个排好序的list，如果是二叉搜索树，那么得到的list应该是个升序序列，或者在中序遍历的同时进行判断（注意中序遍历循环的终止判断条件）   
+
+```python3
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def isValidBST(self, root: TreeNode) -> bool:
+        if root is None:
+            return True 
+        ## 中序遍历
+        stack, min_v = [], float('-inf')
+        while stack or root:
+            ## 中序遍历， stack存访问的节点
+            ### 优先访问左儿子
+            while root:
+                stack.append(root)
+                root = root.left
+            ### 这时的root已经没有左儿子, 开始取出父节点
+            root = stack.pop()
+            if root.val <= min_v:
+                ## 此时父节点的值 <= min_v 说明不是搜索树
+                return False 
+            min_v = root.val 
+            # 更新 min_v 开始访问这时root的右儿子
+            root = root.right 
+
+        return True 
+            
+```
