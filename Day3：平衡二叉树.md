@@ -30,3 +30,33 @@ class Solution(object):
             return 0
         return max(self.get_height(root.left), self.get_height(root.right)) + 1
 ```
+---   
+方法2   
+```python3
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def isBalanced(self, root: TreeNode) -> bool:
+        if root is None:
+            return True
+        return self.get_height(root) >= 0
+
+    def get_height(self, root):
+        if root is None:
+            return 0
+        h_l = self.get_height(root.left)
+        if h_l == -1:
+            return -1
+        h_r  = self.get_height(root.right)
+        if h_r == -1:
+            return -1
+        if abs(h_l - h_r) > 1:
+            return -1
+        return max(h_l, h_r) + 1
+
+```
