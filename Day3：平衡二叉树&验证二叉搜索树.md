@@ -62,7 +62,7 @@ class Solution(object):
 ```
    
 ---   
-[二叉搜索树验证](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+[二叉搜索树验证](https://leetcode-cn.com/problems/validate-binary-search-tree/)   
 分析：通过中序遍历获得一个排好序的list，如果是二叉搜索树，那么得到的list应该是个升序序列，或者在中序遍历的同时进行判断（注意中序遍历循环的终止判断条件）   
 
 ```python3
