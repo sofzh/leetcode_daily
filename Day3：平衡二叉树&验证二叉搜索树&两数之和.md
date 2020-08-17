@@ -97,3 +97,5 @@ class Solution(object):
         return True 
             
 ```
+[两数之和](https://leetcode-cn.com/problems/two-sum/)    
+分析：第一个思路是排序然后查找这俩数， 如果后面的查找（从大到小）没找到，说明不存在，第二个
