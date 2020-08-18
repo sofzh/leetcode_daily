@@ -1,5 +1,5 @@
 [有序链表转二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/)   
-分析：这个有序链表刚好是这个搜索树的中序遍历结果，因此可以考虑用中序遍历的方式构造出这个二叉搜索树   
+分析：这个有序链表刚好是这个搜索树的中序遍历结果，中间的值即为根节点，可以这样一步一步构造出来二叉树，因此可以考虑用中序遍历的方式构造出这个二叉搜索树   
 ```python3 
 # Definition for singly-linked list.
 # class ListNode:
