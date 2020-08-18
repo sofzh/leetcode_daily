@@ -35,3 +35,16 @@ class Solution:
         length = get_length(head)
         return build_tree(0, length-1)
 ```
+
+[爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)   
+分析：这里是斐波那契数列， 直接维护3个值，一直递增下去即可，用动态规划的方法（看到题解里面各种数学推导真是汗颜，没想到还有这么多用数学推公式的方法。。。）    
+```python3
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        p, q, r = 0, 0, 1
+        for i in range(1, n+1):
+            p = q
+            q = r
+            r = q + p
+        return r 
+```
