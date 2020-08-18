@@ -37,7 +37,7 @@ class Solution:
 ```
 
 [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)   
-分析：这里是斐波那契数列， 直接维护3个值，一直递增下去即可，用动态规划的方法（看到题解里面各种数学推导真是汗颜，没想到还有这么多用数学推公式的方法。。。[官方题解](https://leetcode-cn.com/problems/climbing-stairs/solution/pa-lou-ti-by-leetcode-solution/)）    
+分析：这里是斐波那契数列， 直接维护3个值，一直递增下去即可，用动态规划的方法（看到题解里面各种数学推导真是汗颜，没想到还有这么多用数学推公式的方法。。。[官方题解](https://leetcode-cn.com/problems/climbing-stairs/solution/pa-lou-ti-by-leetcode-solution/) 矩阵快速幂+通项公式）    
 ```python3
 class Solution:
     def climbStairs(self, n: int) -> int:
