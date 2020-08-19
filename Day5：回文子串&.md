@@ -23,3 +23,35 @@ class Solution:
                 r = r + 1
         return res 
 ```
+
+[最短无序连续子数组](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/)   
+分析：左往右遍历时，上界只与未遍历的数有关，而下界与已经遍历过的数有关，所以自然而然地就想到了，改为从右往左寻找下界时， 只要找到无序连续子数组的上下界（找到上下界需要交换的位置）即可(这一块有点难想，需要更新上下界最大、最小值)    
+```python3 
+class Solution:
+    def findUnsortedSubarray(self, nums: List[int]) -> int:
+        
+        n = len(nums)
+        if n <= 1:
+            return 0 
+        to_l = n - 2  # 右向左
+        to_r = 1  # 左向右
+        cur_min = nums[-1] # 右向左 下界 
+        cur_max = nums[0]  # 左向右 上界
+        up, down = 0, n-1 ## 此时的上界 下界 位置
+        ## 由左向右找上界 cur_max 的交换位置
+        while to_l >=0 and to_r < n:
+            if nums[to_l] > cur_min:
+                down = to_l
+            else:
+                cur_min = nums[to_l] 
+            if nums[to_r] < cur_max:
+                up = to_r 
+            else:
+                cur_max = nums[to_r]
+            to_l -= 1
+            to_r += 1
+        res = 0 if up < down else up - down + 1
+        return res
+
+
+```
