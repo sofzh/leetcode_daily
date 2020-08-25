@@ -22,3 +22,23 @@ class Solution:
             curr, prev = res, curr
         return res
 ```
+更好的答案，更简约，我的思路有点乱了。。。。    
+```python3
+def rob(self, nums: List[int]) -> int:
+    prev = 0
+    curr = 0
+    
+    # 每次循环，计算“偷到当前房子为止的最大金额”
+    for i in nums:
+        # 循环开始时，curr 表示 dp[k-1]，prev 表示 dp[k-2]
+        # dp[k] = max{ dp[k-1], dp[k-2] + i }
+        prev, curr = curr, max(curr, prev + i)
+        # 循环结束时，curr 表示 dp[k]，prev 表示 dp[k-1]
+
+    return curr
+
+作者：nettee
+链接：https://leetcode-cn.com/problems/house-robber/solution/dong-tai-gui-hua-jie-ti-si-bu-zou-xiang-jie-cjavap/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
