@@ -42,3 +42,32 @@ def rob(self, nums: List[int]) -> int:
 来源：力扣（LeetCode）
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 ```
+---    
+[镜像二叉树](https://leetcode-cn.com/problems/symmetric-tree/)    
+分析：方法1：可以递归的判断左子树与右子树是否是镜像对称的，递归终止条件：递归的终止情况与返回值：（1）左右子树都为空 → True （2）左右子树一个为空 → False （3）左右子树都不空，但是值不相等 → False （4）若上述情况都不满足， 检查 左左&右右， 左右&右左， 方法2：也可以采用层序遍历，每层进行比较是否对称    
+```python3
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        def is_symmetric(left, right):
+            if left is None and right is None:
+                return True 
+            if left is None or right is None:
+                return False
+            if left.val != right.val:
+                return False
+            return is_symmetric(left.left, right.right) and is_symmetric(left.right, right.left)
+        return is_symmetric(root.left, root.right)
+
+        
+            
+
+```
