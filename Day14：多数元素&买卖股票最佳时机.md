@@ -29,7 +29,9 @@ class Solution:
             ## 如果找到了更小的min_val 那么更新min_val
             if prices[idx] < min_val:
                 min_val = prices[idx]
-            ## 注意： 因为卖的时间需要比买的时间晚，在买时间之后，因此之前的最大利润不一定及时更新，需要在后面找到差值更大的时候才可以更新，所以当不更新min_val的时候遇见的值都是比目前的min_val更大的值，这个时候再去判断当前price - min_val 会不会比 当前的 max_diff 更大更为合理
+            ## 注意： 因为卖的时间需要比买的时间晚，在买时间之后，因此之前的最大利润不一定及时更新，
+            ## 需要在后面找到差值更大的时候才可以更新，所以当不更新min_val的时候遇见的值都是比目前的min_val更大的值，
+            ## 这个时候再去判断当前price - min_val 会不会比 当前的 max_diff 更大更为合理
             elif prices[idx] - min_val > max_diff:
                 max_diff = prices[idx] - min_val
             
