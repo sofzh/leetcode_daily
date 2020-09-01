@@ -1,4 +1,4 @@
-[翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)
+[翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)     
 分析：大致有两种思路，1.采用递归，递归交换节点的左右儿子， 2.用队列，对于每一层节点进行访问，并交换左右儿子，然后一直至叶节点     
 ```python3
 # Definition for a binary tree node.
