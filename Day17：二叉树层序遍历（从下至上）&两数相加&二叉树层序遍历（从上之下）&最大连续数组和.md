@@ -115,3 +115,30 @@ class Solution:
             res.append(level)
         return res
 ```
+[最大连续数组和](https://leetcode-cn.com/problems/maximum-subarray/)    
+分析：这个是一个dp问题（动态规划），要求的是数组中最大连续数组和，这里如果将问题定义为第i个位置内的最大连续数组和，将不好写出f(i-1)与f(i)的关系，因此这里定义f(i)为以第i个位置为结尾的最大连续数组和，这样f(i) = max(f(i-1)+num_i, num_i)因为这种定义下只有两种情况：    
+&emsp; 1.f(i)是i-1结尾的数组拼接上第i位置拼接而成的以i为结尾的数组    
+&emsp; 2.f(i)是单独只有第i位置的单个数而组成的长度为1的数组，这样也是满足以i为结尾    
+所以f(i) = max(f(i-1)+num_i, num_i)    
+而要求的是nums数组中的最大连续数组和， 这个数组其实是以第x位置为结尾的连续数组，因此要求的res = max(f(i)), i 属于 [0, n-1]，因此需要一个数记录当前的最大连续数组和    
+```python3 
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        res = 0;
+        if nums == []:
+            return res  
+        
+        ### dp问题
+        ## 初始化为第一个数
+        res = nums[0]
+        pre = res 
+        ## res 代表当前最大连续数组和
+        ## pre 代表以i为结尾的最大连续数组和，这个包含两种情况：1.i位置前面的连续数组 2.只有i位置处的数组， 因此res 就是所有得到的pre中的最大值, res = max(pre_i) (i = 0 ... n-1)
+        for i, num in enumerate(nums):
+            if i == 0:
+                continue  
+            pre = max(pre + num, num)  ## pre_i = max(pre_i-1 + num_i, num_i)
+            res = max(res, pre)
+        return res 
+
+```
