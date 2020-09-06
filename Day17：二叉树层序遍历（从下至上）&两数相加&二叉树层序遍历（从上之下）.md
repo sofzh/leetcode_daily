@@ -86,3 +86,32 @@ class Solution:
                     
         return res
 ```
+[二叉树层序遍历（从上至下）](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)    
+分析：跟第一个思路类似    
+```python3 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        res = list()
+        if root is None:
+            return res
+        q = collections.deque([root])
+        while q:
+            len_q = len(q)
+            level = list()
+            for _ in range(len_q):
+                node = q.popleft()
+                level.append(node.val)
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            res.append(level)
+        return res
+```
