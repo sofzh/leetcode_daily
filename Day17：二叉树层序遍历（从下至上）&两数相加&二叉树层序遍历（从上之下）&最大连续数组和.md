@@ -33,6 +33,7 @@ class Solution:
         return res_list[::-1]
 
 ```
+---    
 
 [两数相加](https://leetcode-cn.com/problems/add-two-numbers/)    
 分析：   
@@ -86,6 +87,8 @@ class Solution:
                     
         return res
 ```
+---   
+
 [二叉树层序遍历（从上至下）](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)    
 分析：跟第一个思路类似    
 ```python3 
@@ -115,6 +118,8 @@ class Solution:
             res.append(level)
         return res
 ```
+----   
+
 [最大连续数组和](https://leetcode-cn.com/problems/maximum-subarray/)    
 分析：这个是一个dp问题（动态规划），要求的是数组中最大连续数组和，这里如果将问题定义为第i个位置内的最大连续数组和，将不好写出f(i-1)与f(i)的关系，因此这里定义f(i)为以第i个位置为结尾的最大连续数组和，这样f(i) = max(f(i-1)+num_i, num_i)因为这种定义下只有两种情况：    
 &emsp; 1.f(i)是i-1结尾的数组拼接上第i位置拼接而成的以i为结尾的数组    
