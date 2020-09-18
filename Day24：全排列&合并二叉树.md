@@ -42,5 +42,27 @@ public:
 ```
 ----    
 [合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/)    
-分析：可以递归的方式对二叉树进行前序遍历，并将
+分析：可以递归的方式对二叉树进行**前序遍历**，并将对应节点进行合并，如果两个节点均非空，则相加val，如果其中至少有一个为空，则返回另一个（**这种情况下，如果两棵树节点均空，那么返回另外一个空节点也是不影响结果的**）    
+```C++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2) {
+        if (t1 == nullptr) return t2;
+        if (t2 == nullptr) return t1;
+        t1->val += t2->val;
+        t1->left = mergeTrees(t1->left, t2->left);
+        t1->right = mergeTrees(t1->right, t2->right);
+        return t1;
+    }
+};
+```
  
