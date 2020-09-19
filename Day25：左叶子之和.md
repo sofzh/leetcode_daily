@@ -15,10 +15,12 @@
  */
 class Solution {
 public:
+    // 判断是否是叶节点
     bool isLeafNode(TreeNode* node) {
         return !node->left && !node->right;
     }
 
+    // 前序遍历 遍历整棵树
     int dfs(TreeNode* node) {
         int ans = 0;
         if (node->left) {
