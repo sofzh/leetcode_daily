@@ -7,8 +7,8 @@
 >> 2. 否则，更新 base 为 当前访问的数字， 同时 count 计数重置为 1   
 > * 其次更新 max_count 和 ans：    
 >> 1. 如果 （count 自加之后）count == max_count ， 说明当前数字跟当前的众数出现次数一致， 将 base 加入 ans 中；    
->> 2. 如果 （count 自加之后）count > max_count，说明新的众数出现， 比之前众数出现次数都多， 这时之前的众数已经不是众数了（被超越了）， 那么重置 ans，以及将 base 放入 ans 中; 
-< 
+>> 2. 如果 （count 自加之后）count > max_count，说明新的众数出现， 比之前众数出现次数都多， 这时之前的众数已经不是众数了（被超越了）， 那么重置 ans，以及将 base 放入 ans 中;    
+<   
 **有个注意点：重置ans的时候vector的clear 是 O(n)的，比较慢， 这里直接重新创建一个vector，会比clear在push_back要快很多**
 ```C++
 /**
