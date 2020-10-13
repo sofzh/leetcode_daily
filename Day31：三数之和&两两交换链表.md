@@ -55,5 +55,37 @@ public:
 [两两交换链表](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)    
 分析：    
 > * 创建虚拟头结点， 令temp表示当前节点， 初始时 temp = 虚拟头结点
-> * 每次交换 temp 后面的两个节点， 要注意：**如果**
+> * 每次交换 temp 后面的两个节点， 要注意：**如果后面最多有1个节点，那么就不需要交换**，否则交换节点 **temp -> node1 -> node2 ---> temp -> node2 -> node1 然后更新 temp = node1**     
+```C++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        ListNode* dummyHead = new ListNode(0);
+        dummyHead->next = head;
+        ListNode* temp = dummyHead;
+        // 如果 temp 后最多只有一个节点，说明不需要进行交换， 可以直接返回
+        // 否则需要进行交换 temp -> node1 -> node2 ---> temp -> node2 -> node1 然后更新 temp = node1 开始对 node1 后面的节点进行交换
+        while (temp->next != nullptr && temp->next->next != nullptr) {
+            ListNode* node1 = temp->next;
+            ListNode* node2 = temp->next->next;
+            temp->next = node2;
+            node1->next = node2->next;
+            node2->next = node1;
+            temp = node1;
+        }
+        return dummyHead->next; // 注意这里return 需要去掉虚拟头结点
+
+    }
+};
+```
       
