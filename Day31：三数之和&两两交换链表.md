@@ -52,3 +52,8 @@ public:
 ```
 
 ---   
+[两两交换链表](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)    
+分析：    
+> * 创建虚拟头结点， 令temp表示当前节点， 初始时 temp = 虚拟头结点
+> * 每次交换 temp 后面的两个节点， 要注意：**如果**
+      
