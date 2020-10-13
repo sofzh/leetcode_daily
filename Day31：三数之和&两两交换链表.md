@@ -79,12 +79,12 @@ public:
         while (temp->next != nullptr && temp->next->next != nullptr) {
             ListNode* node1 = temp->next;
             ListNode* node2 = temp->next->next;
-            temp->next = node2;
-            node1->next = node2->next;
-            node2->next = node1;
-            temp = node1;
+            temp->next = node2; // 当前节点连上 node2
+            node1->next = node2->next;  // node1 连上 后续节点
+            node2->next = node1; // node2 指向 node1 完成 node1 node2 交换
+            temp = node1; // 更新 当前节点
         }
-        return dummyHead->next; // 注意这里return 需要去掉虚拟头结点
+        return dummyHead->next;
 
     }
 };
