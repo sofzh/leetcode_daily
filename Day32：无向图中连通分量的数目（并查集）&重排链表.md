@@ -78,3 +78,100 @@ public:
 > * 这里是将l0->l1->l2->...->l_n-1->l_n 变成 l0->l_n->l1->l_n1->...，差不多就是将l0->l1->...->l_middle 和 l_n->l_n-1->...->l_middle+1这两个链表进行合并，这里关键的地方在于想到这里合并这俩链表;   
 > * 还有一种方式是因为链表不好直接下标访问，可以用线性表存储链表，用线性表直接重建链表，这个方法时间复杂度是O(N)，空间复杂度也是O(N)，而直接拆分链表+翻转+合并的时间复杂度是O(N)，空间复杂度是O(1)，比之前那个方法要好，因此这里实现了这种方式;  
 > *  快慢指针找到链表中间   
+```C++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+void show_list(ListNode* head){
+    if(!head)
+        return;
+    ListNode* l = head;
+    while(l){
+        std::cout << l->val << " ";
+        l = l->next;
+    }
+    std::cout << std::endl;
+    return;
+}
+
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        // 1.快慢指针找到中间节点
+        // 2.将右边链表进行翻转
+        // 3.合并两个链表
+        if(!head)
+            return;
+        // std::cout << " head is " << std::endl;
+        // show_list(head);
+        ListNode* mid = midNode(head);
+        // std::cout << " mid node is " << mid->val << std::endl;
+        ListNode* l1 = head;
+        ListNode* l2 = mid->next;
+        // std::cout << " l1 is " << std::endl;
+        // show_list(l1);
+        // std::cout << " l2 is " << std::endl;
+        // show_list(l2);
+
+        mid->next = nullptr;
+        // std::cout << " after reverse " << std::endl;
+        l2 = reverseNode(l2);
+        // std::cout << " l1 is " << std::endl;
+        // show_list(l1);
+        // std::cout << " l2 is " << std::endl;
+        // show_list(l2);
+
+        mergeNode(l1, l2);
+        // std::cout << " after merge " << std::endl;
+        // show_list(head);
+        return;
+    }
+
+    ListNode* midNode(ListNode* head){
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast->next && fast->next->next){
+            slow = slow->next; 
+            fast = fast->next->next;
+        }
+        return slow; 
+    }
+
+    ListNode* reverseNode(ListNode* head){
+        ListNode* pre = nullptr;
+        ListNode* cur = head; 
+        while(cur){
+            ListNode* node_tmp = cur->next; // 获取之前的next
+            cur->next = pre; // 翻转链表
+            pre = cur; // 更新pre
+            cur = node_tmp; // 更新cur
+        }
+        return pre;
+    }
+
+    void mergeNode(ListNode* l1, ListNode* l2){
+        // l1 = merge(l1, l2)
+        ListNode* l1_tmp;
+        ListNode* l2_tmp;
+        while(l1 && l2){
+            l1_tmp = l1->next; // 这里可能是 nullptr
+            l2_tmp = l2->next;
+
+            l1->next = l2;
+            l2->next = l1_tmp; 
+
+            // 更新 l1 l2
+            l1 = l1_tmp;
+            l2 = l2_tmp;
+        }
+    }
+};
+```
