@@ -34,6 +34,36 @@ public:
 [无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)  
 分析：  
 > * 这里需要用 set 来记录子串，这样判断是否新加入了重复的子串；  
-> * 这样可以先从一个字符的起点开始算，计算最长多少不重复子串，然后将起点
+> * 这样可以先从一个字符的起点开始算，计算最长多少不重复子串，然后将起点的字符去掉，因为之前子串的起点至终点都是不重复的，所以起点右移一次之后，至终点也是不重复的，终点处的指针只需右移继续判断是否重复了即可； 
+> * 因为题目要求求解最长不重复子串，因此当右指针至终点时构成的不重复字串，这时再右移起点不会得到比这个更长的，因此这个时候直接不需要继续遍历寻找了，只需在整个遍历过程中记录最长子串的长度即可；  
+```C++
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        // 滑动窗口， 左右指针， 左指针移动 右指针也开始移动(至少从当前位置开始)
+        std::unordered_set<char> occ;
+        int n = s.size();
+        int rk = 0, ans = 0; // 右指针初始化为 0
+        for(int i = 0; i < n; ++i){
+
+            
+            while(rk < n && !occ.count(s[rk])){
+                occ.emplace(s[rk]);
+                rk++;
+            }
+            
+            ans = std::max(ans, rk-1+1-i); // 这里 rk - 1才是rk位于的不重复位置 + 1 是为了统计个数  
+            if(rk == n){ // 如果右指针到达终点， 不会有比这个更长的了
+                return ans;
+            }
+            occ.erase(s[i]);
+            // occ.erase(s[rk]); 
+
+        }
+        return ans;
+
+    }
+};
+```
 
  
