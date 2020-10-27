@@ -34,4 +34,6 @@ public:
 [无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)  
 分析：  
 > * 这里需要用 set 来记录子串，这样判断是否新加入了重复的子串；  
-> * 这样
+> * 这样可以先从一个字符的起点开始算，计算最长多少不重复子串，然后将起点
+
+ 
