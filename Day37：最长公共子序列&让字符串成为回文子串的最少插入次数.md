@@ -34,4 +34,4 @@ public:
 [字符串变成回文串的最小插入次数](https://leetcode-cn.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/)   
 分析：  
 **这道题比较难**  
-> * 一般
+> * 一般没啥明显思路的，不防
