@@ -55,5 +55,36 @@ public:
 [括号生成](https://leetcode-cn.com/problems/generate-parentheses/)  
 分析：  
 > * 这里要生成符合规则的括号， 那么就相当于用回溯的方式给出合理的组合，因此我们采用回溯的方式去做；  
-> * 我们需要考虑回溯的终止条件：当前path中放入了n个括号组合，单层逻辑：最终形成合理的括号组合，应该是左括号的个数 == 右括号的个数，同时左括号应该在左边，如果某个位置处[0, i]区间内，左括号个数 < 右括号个数， 那么这个组合一定不合理， 而且左括号一定要放前面；  
-> * 如果每个位置处，左括号的个数 >= 右括号个数， 那么说明当前这个状态是合理状态，直至所有括号都添加进去
+> * 我们需要考虑回溯的终止条件：当前path中放入了n个括号组合，单层逻辑：最终形成合理的括号组合，应该是左括号的个数 == 右括号的个数，同时左括号应该在左边，如果某个位置处[0, i]区间内，左括号个数 <= 右括号个数， 那么这个组合一定不合理， 而且左括号一定要放前面；  
+> * 如果每个位置处，左括号的个数 >= 右括号个数， 那么说明当前这个状态是合理状态，直至所有括号都添加进去，左右括号个数一致，因此剪枝过程是这样的：如果当前位置处，右括号个数 <= 左括号个数，那么久可以添加右括号或者添加左括号；  
+```C++
+class Solution {
+public:
+    void backtrack(vector<string>& ans, string& cur, const int left, const int right, const int n){
+        if(cur.size() == 2*n){
+            ans.emplace_back(cur);
+            return;
+        }
+        if(left < n){
+            // 如果这时可以添加 (
+            cur.push_back('(');
+            backtrack(ans, cur, left+1, right, n);
+            cur.pop_back();
+        }
+
+        // 如果可以添加 ')' 这时右括号的个数 一定 < 左括号个数
+        if(right < left){
+            cur.push_back(')');
+            backtrack(ans, cur, left, right+1, n);
+            cur.pop_back();
+        }
+    }
+
+    vector<string> generateParenthesis(int n) {
+        vector<string> ans;
+        string s;
+        backtrack(ans, s, 0, 0, n);
+        return ans;
+    }
+};
+```
