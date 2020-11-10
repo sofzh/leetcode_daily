@@ -37,3 +37,36 @@ public:
 ---  
 [接雨水（单调栈求解）](https://leetcode-cn.com/problems/trapping-rain-water/)  
 分析：  
+> * 这道题目[之前](https://github.com/sofzh/leetcode_daily/blob/master/Day36%EF%BC%9A%E6%8E%A5%E9%9B%A8%E6%B0%B4%26%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2.md) 用双指针的方式做过，这一次用单调栈的思路尝试一下，参考了[Carl大佬的思路](https://leetcode-cn.com/problems/trapping-rain-water/solution/42-jie-yu-shui-shuang-zhi-zhen-dong-tai-gui-hua-da/)；  
+> * 用单调栈，因为不考虑两边接水，所以这里没有在两边位置上放“哨兵”；  
+> * 这个栈并不是严格单调的，因为如果遇到相等的情况，需要用右边的来计算接雨水的 w ；  
+```C++
+class Solution {
+public:
+// 单调栈 单调递减
+    int trap(vector<int>& height){
+        
+        const int n = height.size();
+        int ans = 0;
+        if(n <= 1)
+            return ans;
+        std::stack<int> st;
+        int cur;
+        int h, w;
+        for(int i = 0; i < n; ++i){
+            while(!st.empty() && height[i] > height[st.top()]){
+                // 要用 > 而不是 >= 因为这边需要用 右边的格子来进行计算 w 所以这里的单调栈并不是严格单调的
+                cur = st.top();
+                st.pop();
+                if(!st.empty()){ // 两边位置不会接水
+                    h = std::min(height[st.top()], height[i]) - height[cur];
+                    w = i - st.top() - 1;
+                    ans += h * w;
+                }
+            }
+            st.emplace(i); // 将i放入单调栈中
+        }
+        return ans;
+    }
+};
+```
