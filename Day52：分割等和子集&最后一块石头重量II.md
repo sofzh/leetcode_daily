@@ -37,4 +37,9 @@ public:
         return dp[target] == target;
     }
 };
-```
+```   
+---  
+[最后一块石头重量II](https://leetcode-cn.com/problems/last-stone-weight-ii/submissions/)  
+分析：  
+> * 这里其实就是把石头尽量分成均等重量；  
+> * 尽可能让两边石头重量相近，这样得到的才是最小石头重量， 跟上面分子集问题极其相似；  
