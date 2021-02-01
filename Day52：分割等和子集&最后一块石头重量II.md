@@ -43,3 +43,23 @@ public:
 分析：  
 > * 这里其实就是把石头尽量分成均等重量；  
 > * 尽可能让两边石头重量相近，这样得到的才是最小石头重量， 跟上面分子集问题极其相似；  
+```C++
+class Solution {
+public:
+    int lastStoneWeightII(vector<int>& stones) {
+        int sum = 0;
+        for(const auto& stone : stones){
+            sum += stone;
+        }
+        int target = sum / 2;
+        // 0-1 背包
+        std::vector<int> dp(target+1, 0);
+        for(int i = 0; i < stones.size(); ++i){
+            for(int j = target; j >= stones[i]; --j){
+                dp[j] = std::max(dp[j], dp[j - stones[i]] + stones[i]);
+            }
+        }
+        return (sum - dp[target]) - dp[target];
+    }
+};
+```
