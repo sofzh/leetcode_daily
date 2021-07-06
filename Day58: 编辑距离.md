@@ -1,4 +1,4 @@
-[编辑距离](https://leetcode-cn.com/problems/edit-distance/) 
+[编辑距离](https://leetcode-cn.com/problems/edit-distance/)   
 分析：   
 > * 编辑距离的题目非常适合用动态规划的思路来做；  
 > * 首先关于dp的定义：dp[i][j] : 定义为 以 word1[i-1] 为结尾的 str 与 以 word2[j-1] 为结尾的 str 之间的编辑距离， 这里用 i-1 和 j-1 是因为要考虑 word1 、 word2 其中有可能是空str；  
